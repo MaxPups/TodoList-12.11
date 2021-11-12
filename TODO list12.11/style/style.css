@@ -1,0 +1,103 @@
+* {
+  margin: 0%;
+  padding: 0%;
+}
+button{
+    cursor: pointer;
+}
+
+.block_content {
+    margin: 183px auto;
+  width: 594px;
+  height: 386px;
+  box-shadow: 0px 8px 35px rgba(0, 0, 0, 0.16);
+  border-radius: 16px;
+  position: relative;
+  overflow:hidden;
+}
+.block_create{
+    display: flex;
+    justify-content: space-between;
+    padding: 24px 24px;
+    border-bottom: 1px solid  #DEE2E6;
+}
+#value{
+    width: 356px;
+    height: 38px;
+    border: 1px solid #CED4DA;
+    box-sizing: border-box;
+    border-radius: 4px;
+    color: #54595E;
+    padding-left: 13px;
+}
+#add{
+    width: 166px;
+height: 39px;
+font-size: 16px;
+line-height: 19px;
+color: #FFFFFF;
+border: none;
+background: #272829;
+border-radius: 4px;
+}
+/*  block result*/
+.block_result{
+overflow:hidden;
+padding: 32px;
+display: flex;
+flex-direction: column;
+row-gap: 26px;
+}
+.new_task{
+    width: 546px;
+    height: 21px;
+    margin: 0% auto;
+    display: flex;
+    justify-content: space-between;
+}
+.checked{
+    border: none;
+    cursor: pointer;
+}
+.new_task>p{
+    width: 455px;
+    color: #54595E;
+}
+.new_task>button{
+    border: none;
+    background: none;
+}
+.new_task>button::after{
+    content: url(../image/❌.svg);
+}
+/* block btn remove */
+.block_btn_clear{
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    background: #F5F5F5;
+    padding:18px 24px;
+}
+#removeAll{
+    width: 131px;
+    height: 39px;
+    border-radius: 4px;
+    font-size: 16px;
+line-height: 19px;
+border: none;
+background: #DC3545;
+color: #FFFFFF;
+}
+#removeDone{
+    width: 214px;
+    height: 39px;
+    border-radius: 4px;
+    font-size: 16px;
+line-height: 19px;
+border: none;
+background: #6C757D;
+color: #FFFFFF;
+}
