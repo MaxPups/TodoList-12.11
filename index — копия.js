@@ -40,16 +40,18 @@ function render() {
     block.classList.add("new_task");
     let index = DATA.indexOf(i);
     if (i.state == 1) {
-      block.innerHTML = `<input type="checkbox" data-index = ${index} class="checked" checked>
+      block.innerHTML = `<input type="checkbox" data-index=${index} class="checked" checked>
       <p>${i.title}</p>
-      <button data-index = ${index}>
+      <button data-index=${index} id="edit"></button>
+      <button data-index=${index} id="remove">
       </button>`;
       result.prepend(block);
     }
     if (i.state == 0) {
       block.innerHTML = `<input type="checkbox" data-index = ${index} class="checked">
       <p>${i.title}</p>
-      <button data-index = ${index}>
+      <button data-index=${index} id="edit"></button>
+      <button data-index = ${index} id="remove">
       </button>`;
       result.prepend(block);
     }
@@ -59,7 +61,7 @@ function render() {
 // функция которая удаляет задачу и удаляет с localStorage
 const tasks = document.querySelector(".block_result");
 tasks.addEventListener("click", (event) => {
-  if (event.target.tagName === "BUTTON") {
+  if (event.target.id === "remove") {
     let ind = event.target.getAttribute("data-index");
     DATA.splice(ind, 1);
     // console.log(DATA);
@@ -93,7 +95,6 @@ tasks.addEventListener("click", (event) => {
   }
 });
 
-
 // функция удаляет выполненые задачи
 const btnDone = document.querySelector("#removeDone");
 btnDone.addEventListener("click", () => {
@@ -113,34 +114,41 @@ btnDone.addEventListener("click", () => {
   localStorage.setItem("arr", JSON.stringify(DATA));
 });
 
+// функция изменения текста (вызывает только окно)
+tasks.addEventListener("click", (event) => {
+  if (event.target.id === "edit") {
+    let index = event.target.getAttribute("data-index");
 
+    let editBlock = document.createElement("div");
+    let modal = document.querySelector(".BlackWindow");
+    editBlock.classList.add("editBlock");
+    editBlock.innerHTML = `<div><input type="text" id="editTask" value="">
+    <button id="goEdit" data-index=${index}>Изменить</button>
+    <buttoon id="closeModal"></button></div>`;
+    modal.append(editBlock);
+    modal.style = "display: block;";
+  }
+});
 
-
-// // функция изменения текста
-// tasks.addEventListener('click', (event)=>{
-//   if(event.target.classList.contains('edit')){
-//     let editBlock= document.createElement('div');
-//     let modal = document.createElement('div');
-//     editBlock.classList.add('editBlock')
-//     modal.classList.add('BlackWindow');
-//     editBlock.innerHTML = `<input type="text" id="editTask">
-//     <button id="goEdit">Изменить</button>`
-//     document.querySelector('body').append(editBlock);
-//     document.querySelector('body').append(modal);
-
-//   }
-// })
-
-
-
-
-
-
-
-
-
-
-
+// функиця взаимодействует с модальным окном и изменяет задачу
+let editBlock = document.querySelector(".BlackWindow");
+editBlock.addEventListener("click", (event) => {
+  let modal = document.querySelector(".BlackWindow");
+  let textValue = document.querySelector("#editTask");
+  if (event.target.id === "closeModal") {
+    modal.style = "display: none;"
+  }
+  if (event.target.id === "goEdit") {
+    let index = event.target.getAttribute("data-index");
+    console.log(textValue.value);
+    DATA.splice(index, 1, { title: textValue.value, state: 0 });
+    console.log(DATA);
+    render();
+    modal.innerHTML = "";
+    modal.style = "display: none;";
+    localStorage.setItem("arr", JSON.stringify(DATA));
+  }
+});
 
 // for(i=0; i< inputs.length; i++){
 
